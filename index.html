@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#102a43" />
+    <title>PC-RGNN Explorer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-lockup">
+          <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div>
+            <div class="brand-name">PC-RGNN</div>
+            <div class="brand-sub">3D detection lab</div>
+          </div>
+        </div>
+
+        <div class="sidebar-label">WORKSPACE</div>
+        <nav class="sidebar-nav" aria-label="Main navigation">
+          <a class="nav-item active" href="#overview"><span class="nav-icon">⌂</span>Overview</a>
+          <a class="nav-item" href="#pipeline"><span class="nav-icon">◈</span>Pipeline</a>
+          <a class="nav-item" href="#results"><span class="nav-icon">▥</span>Results</a>
+        </nav>
+
+        <div class="sidebar-label section-label">LEARN</div>
+        <nav class="sidebar-nav" aria-label="Learning navigation">
+          <a class="nav-item" href="#foundations"><span class="nav-icon">◌</span>Foundations</a>
+          <a class="nav-item" href="#theory"><span class="nav-icon">∿</span>Attention theory</a>
+        </nav>
+
+        <div class="sidebar-note">
+          <div class="sidebar-note-kicker">LIVE EXPLORATION</div>
+          <div class="sidebar-note-title">See what the model sees.</div>
+          <div class="sidebar-note-copy">Move from sparse measurements to a denser graph and a tighter box.</div>
+          <a href="#demo" class="sidebar-note-link">Open the demo <span>↗</span></a>
+        </div>
+
+        <div class="sidebar-footer">
+          <div class="mini-status"><span class="status-dot"></span>All systems ready</div>
+          <div class="footer-meta">Ali Aqil · ENSIAS</div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div class="breadcrumb"><span>WORKSPACE</span><b>/</b><span class="current">PC-RGNN EXPLORER</span></div>
+          <div class="topbar-actions">
+            <span class="live-pill"><span class="status-dot"></span>Interactive demo</span>
+            <button class="icon-button" id="resetButton" type="button" title="Reset demo">↻</button>
+            <div class="avatar">AA</div>
+          </div>
+        </header>
+
+        <section class="page-wrap" id="overview">
+          <div class="hero-row">
+            <div class="hero-copy">
+              <div class="eyebrow">FROM LIDAR TO GRAPH NEURAL NETWORKS</div>
+              <h1>Make sparse geometry<br /><em>work harder.</em></h1>
+              <p class="hero-text">An interactive walk through PC-RGNN for 3D object detection. Complete what LiDAR misses, then let adaptive graph attention refine the box.</p>
+              <div class="hero-actions">
+                <button class="primary-button" id="runButton" type="button"><span class="play-icon">▶</span> Run full pipeline</button>
+                <a class="text-button" href="#foundations">Start with the basics <span>↓</span></a>
+              </div>
+            </div>
+            <div class="hero-meta">
+              <div class="hero-meta-line"></div>
+              <div class="hero-meta-label">A GUIDED PATH FROM</div>
+              <div class="hero-meta-title">Laser pulses<br />to attention-based<br />message passing</div>
+              <div class="hero-meta-bottom">Prototype environment <span>v0.1</span></div>
+            </div>
+          </div>
+
+          <div class="metric-row" aria-label="Model summary">
+            <div class="metric-card">
+              <div class="metric-label">COMPLETED POINTS</div>
+              <div class="metric-value" id="metricPoints">148</div>
+              <div class="metric-detail positive">+42 added by PC</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">GRAPH EDGES</div>
+              <div class="metric-value" id="metricEdges">1,184</div>
+              <div class="metric-detail">k = <span id="metricK">8</span> neighbors</div>
+            </div>
+            <div class="metric-card accent-card">
+              <div class="metric-label">BOX CONFIDENCE</div>
+              <div class="metric-value" id="metricConfidence">92.4<span>%</span></div>
+              <div class="metric-detail positive">+4.7 pts after AMS-GNN</div>
+            </div>
+            <div class="metric-card metric-card-wide">
+              <div class="metric-label">CURRENT VIEW</div>
+              <div class="metric-view"><span class="view-dot"></span><span id="currentViewLabel">Sparse input</span><span class="view-arrow">→</span><span id="currentViewNext">Completion</span></div>
+              <div class="metric-detail">Scene 07 · sedan crop</div>
+            </div>
+          </div>
+
+          <section class="demo-section" id="demo">
+            <div class="section-heading">
+              <div>
+                <div class="section-kicker">LIVE MODEL VIEW</div>
+                <h2>Follow one object through the pipeline</h2>
+              </div>
+              <div class="scene-select-wrap">
+                <span>SCENE</span>
+                <select id="sceneSelect" aria-label="Select scene">
+                  <option value="sedan">07 · Sedan crop</option>
+                  <option value="van">12 · Van crop</option>
+                  <option value="cyclist">19 · Cyclist crop</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="demo-grid">
+              <div class="visual-card">
+                <div class="visual-card-header">
+                  <div>
+                    <div class="card-kicker" id="visualKicker">STAGE A · RAW OBSERVATION</div>
+                    <div class="visual-title" id="visualTitle">Sparse input cloud</div>
+                  </div>
+                  <div class="legend"><span class="legend-item"><i class="legend-swatch observed"></i>Observed</span><span class="legend-item"><i class="legend-swatch added"></i>Added</span><span class="legend-item"><i class="legend-swatch edge"></i>Edges</span></div>
+                </div>
+                <div class="canvas-wrap">
+                  <canvas id="pointCanvas" width="1000" height="510" aria-label="Interactive point cloud visualization"></canvas>
+                  <div class="canvas-overlay-label top-left">BIRD'S-EYE PROJECTION</div>
+                  <div class="canvas-overlay-label bottom-right" id="canvasHint">Drag controls to inspect the graph</div>
+                </div>
+                <div class="visual-card-footer">
+                  <span><i class="footer-dot orange"></i>LiDAR return</span>
+                  <span><i class="footer-dot cyan"></i>Generated geometry</span>
+                  <span><i class="footer-dot navy"></i>Predicted box</span>
+                </div>
+              </div>
+
+              <div class="control-card">
+                <div class="card-kicker">INSPECTOR</div>
+                <div class="control-heading">Model state</div>
+                <div class="stage-list" id="stageList">
+                  <button class="stage-item active" data-stage="0" type="button"><span class="stage-number">01</span><span><b>Observe</b><small>Raw LiDAR points</small></span><span class="stage-check">●</span></button>
+                  <button class="stage-item" data-stage="1" type="button"><span class="stage-number">02</span><span><b>Complete</b><small>Fill visibility gaps</small></span><span class="stage-check">●</span></button>
+                  <button class="stage-item" data-stage="2" type="button"><span class="stage-number">03</span><span><b>Attend</b><small>Weight useful neighbors</small></span><span class="stage-check">●</span></button>
+                  <button class="stage-item" data-stage="3" type="button"><span class="stage-number">04</span><span><b>Regress</b><small>Predict the final box</small></span><span class="stage-check">●</span></button>
+                </div>
+                <div class="control-divider"></div>
+                <label class="control-row" for="densityRange"><span><b>Input density</b><small>Simulate occlusion</small></span><span class="range-value" id="densityValue">62%</span></label>
+                <input id="densityRange" type="range" min="28" max="92" value="62" />
+                <label class="control-row" for="scaleSelect"><span><b>Graph scale</b><small>Neighbors per point</small></span><span class="select-value">k = <span id="scaleValue">8</span></span></label>
+                <select class="full-select" id="scaleSelect" aria-label="Graph scale"><option value="6">k = 6 · detail</option><option value="8" selected>k = 8 · balanced</option><option value="12">k = 12 · context</option></select>
+                <label class="toggle-row" for="attentionToggle"><span><b>Adaptive attention</b><small>Input-conditioned weights</small></span><input id="attentionToggle" type="checkbox" checked /><span class="toggle-ui"></span></label>
+              </div>
+            </div>
+          </section>
+
+          <section class="foundations-section" id="foundations">
+            <div class="section-heading compact">
+              <div>
+                <div class="section-kicker">THE FOUNDATIONS</div>
+                <h2>Three ideas carry the model</h2>
+              </div>
+              <span class="section-caption">A point cloud has no grid. PC-RGNN gives it one useful structure.</span>
+            </div>
+            <div class="idea-grid">
+              <article class="idea-card">
+                <div class="idea-index">01</div>
+                <div class="idea-icon graph-icon"><span></span><span></span><span></span><i></i></div>
+                <h3>Make neighbors explicit</h3>
+                <p>Build a k-NN graph so each point can exchange information with nearby geometry.</p>
+                <div class="idea-formula">G = (V, E)</div>
+              </article>
+              <article class="idea-card featured">
+                <div class="idea-index">02</div>
+                <div class="idea-icon pulse-icon"><span></span><span></span><span></span></div>
+                <h3>Complete the gaps</h3>
+                <p>Generate missing points while preserving the measurements that the sensor actually saw.</p>
+                <div class="idea-formula">Y = Y<sub>real</sub> ∪ Y<sub>added</sub></div>
+              </article>
+              <article class="idea-card">
+                <div class="idea-index">03</div>
+                <div class="idea-icon attention-icon"><span></span><span></span><span></span><span></span></div>
+                <h3>Weight what matters</h3>
+                <p>Use local and global attention across multiple graph scales before box regression.</p>
+                <div class="idea-formula">α<sub>ij</sub> = softmax(e<sub>ij</sub>)</div>
+              </article>
+            </div>
+          </section>
+
+          <section class="pipeline-section" id="pipeline">
+            <div class="section-heading compact">
+              <div>
+                <div class="section-kicker">THE PIPELINE</div>
+                <h2>From rough proposal to precise box</h2>
+              </div>
+            </div>
+            <div class="pipeline-track">
+              <div class="pipeline-line"></div>
+              <div class="pipeline-node done"><span>01</span><b>Proposal</b><small>Find rough objects</small></div>
+              <div class="pipeline-node done"><span>02</span><b>Completion</b><small>Restore geometry</small></div>
+              <div class="pipeline-node active"><span>03</span><b>AMS-GNN</b><small>Refine features</small></div>
+              <div class="pipeline-node"><span>04</span><b>Regression</b><small>Output 3D box</small></div>
+            </div>
+          </section>
+
+          <section class="results-section" id="results">
+            <div class="section-heading compact">
+              <div>
+                <div class="section-kicker">KITTI VALIDATION · CAR 3D AP @ IOU 0.7</div>
+                <h2>Performance holds in the hard cases</h2>
+              </div>
+              <div class="result-highlight"><span>84.27</span><small>3D mAP · full model</small></div>
+            </div>
+            <div class="results-grid">
+              <div class="table-card">
+                <table>
+                  <thead><tr><th>METHOD</th><th>EASY</th><th>MODERATE</th><th>HARD</th></tr></thead>
+                  <tbody id="benchmarkBody"></tbody>
+                </table>
+                <div class="table-footnote"><span class="orange-bar"></span>PC-RGNN gains +2.06 Easy · +2.80 Moderate · +3.07 Hard over PointRCNN</div>
+              </div>
+              <div class="ablation-card" id="theory">
+                <div class="card-kicker">ABLATION VIEW</div>
+                <div class="ablation-title">Each module fixes a different failure mode</div>
+                <div class="ablation-bars" id="ablationBars"></div>
+                <div class="ablation-legend"><span><i class="legend-swatch muted"></i>Base</span><span><i class="legend-swatch blue"></i>+ completion</span><span><i class="legend-swatch orange-fill"></i>+ AMS-GNN</span></div>
+              </div>
+            </div>
+          </section>
+
+          <footer class="page-footer">
+            <span>PC-RGNN Explorer · built from the supplied project brief</span>
+            <span>Ali Aqil · ENSIAS · Artificial Intelligence Engineering</span>
+          </footer>
+        </section>
+      </main>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
