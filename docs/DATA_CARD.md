@@ -10,11 +10,11 @@ The notebook keeps three origins separate:
 - **Derived data:** normalized or subsampled views of a raw source cloud.
 - **Synthetic data:** midpoint-interpolated completion points and any optional perturbations.
 
-The filename-to-class mapping is a manual project label, not an official PCL benchmark annotation. The source count is too small and class coverage is too imbalanced for a trustworthy class-balanced holdout. Therefore the PCL notebook does not report classification accuracy or claim generalization. It demonstrates parsing, graph construction, completion, and attention encoding only.
+The filename-to-class mapping is a manual project label, not an official PCL benchmark annotation. The source count is too small and class coverage is too imbalanced for a trustworthy class-balanced holdout. Therefore the PCL notebook does not report classification accuracy or claim generalization. Its learned completion target is produced by masking points from the same raw cloud; this demonstrates the completion-to-feature architecture but is not a real-occlusion benchmark.
 
 ## nuScenes mini detection track
 
-The nuScenes mini files are not included in Git. The user must download them from the official nuScenes distribution and set `NUSCENES_ROOT` locally. The notebook uses the official devkit to read LiDAR, scenes, categories, poses, and annotated boxes. Its development split is scene-disjoint and its object-level detector reports diagnostic center, size, yaw, and axis-aligned 3D IoU metrics. These results are development diagnostics on the mini split, not full nuScenes leaderboard results.
+The nuScenes mini files are not included in Git. The user must download them from the official nuScenes distribution and set `NUSCENES_ROOT` locally. The notebook uses the official devkit to read LiDAR, scenes, categories, poses, and annotated boxes. Its development split is scene-disjoint and its object-level detector predicts completion points before encoding observed-plus-completed features for class and box heads. Its metrics are diagnostic center, size, yaw, and axis-aligned 3D IoU quantities. These results are development diagnostics on the mini split, not full nuScenes leaderboard results.
 
 ## Reproducibility boundary
 
