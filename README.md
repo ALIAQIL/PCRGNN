@@ -44,7 +44,7 @@ pip install -r requirements.txt
 export NUSCENES_ROOT=/path/to/nuscenes
 ~~~
 
-The notebook uses official scene, category, pose, LiDAR, and box tables. It enforces a scene-disjoint train/validation split and performs an object-level development experiment from ground-truth-centered crops. Results are mini-split development diagnostics, not full-dataset leaderboard claims. The reported IoU is axis-aligned diagnostic IoU rather than official oriented nuScenes AP.
+The notebook uses official scene, category, pose, LiDAR, and box tables. It enforces a scene-disjoint train/validation split and performs an object-level development experiment from jittered proposal crops with ground-truth box targets. Results are mini-split development diagnostics, not full-dataset leaderboard claims. The reported IoU is axis-aligned diagnostic IoU rather than official oriented nuScenes AP.
 
 If nuScenes is not mounted, the notebook skips data-dependent cells with setup instructions instead of fabricating results.
 
