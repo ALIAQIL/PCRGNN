@@ -2,3 +2,7 @@
 .venv311/
 __pycache__/
 .ipynb_checkpoints/
+data/nuscenes/
+data/nuscenes/**
+outputs/
+checkpoints/

@@ -1,0 +1,64 @@
+{
+  "dataset_name": "Point Cloud Library test point clouds",
+  "dataset_repository": "https://github.com/PointCloudLibrary/pcl",
+  "pinned_revision": "66e1d0ea8cc3fa54820eb38e18ad0adac6345b94",
+  "license_note": "The files remain attributed to the upstream PCL project. Review the upstream repository license before redistribution.",
+  "files": [
+    {
+      "file": "bun0.pcd",
+      "class": "bunny",
+      "url": "https://raw.githubusercontent.com/PointCloudLibrary/pcl/66e1d0ea8cc3fa54820eb38e18ad0adac6345b94/test/bun0.pcd",
+      "bytes": 32101,
+      "sha256": "d714de14c068adad5577db8129dbfd9455b0bda78ad4c03d68d988e693a2c04d"
+    },
+    {
+      "file": "bun01.pcd",
+      "class": "bunny",
+      "url": "https://raw.githubusercontent.com/PointCloudLibrary/pcl/66e1d0ea8cc3fa54820eb38e18ad0adac6345b94/test/bun01.pcd",
+      "bytes": 5493,
+      "sha256": "6e4a20650118ab9195f774784518f87e1920202791b6f6da5159bb4dcf94a501"
+    },
+    {
+      "file": "bun02.pcd",
+      "class": "bunny",
+      "url": "https://raw.githubusercontent.com/PointCloudLibrary/pcl/66e1d0ea8cc3fa54820eb38e18ad0adac6345b94/test/bun02.pcd",
+      "bytes": 6055,
+      "sha256": "76ec5de537b497abbdcb53c670c4ba9fe151e426feab29efd6bc08586bc2ced7"
+    },
+    {
+      "file": "bun03.pcd",
+      "class": "bunny",
+      "url": "https://raw.githubusercontent.com/PointCloudLibrary/pcl/66e1d0ea8cc3fa54820eb38e18ad0adac6345b94/test/bun03.pcd",
+      "bytes": 5526,
+      "sha256": "e5d6c5618fb4976a1ee7f65aa23fb28d455df6c73bb4c9f12ec0fb4299272413"
+    },
+    {
+      "file": "bun4.pcd",
+      "class": "bunny",
+      "url": "https://raw.githubusercontent.com/PointCloudLibrary/pcl/66e1d0ea8cc3fa54820eb38e18ad0adac6345b94/test/bun4.pcd",
+      "bytes": 9782,
+      "sha256": "11c29f96e049e88f650cf215eb38a84ef9f9478a8c470f2605c72dde751da81c"
+    },
+    {
+      "file": "curve3d.pcd",
+      "class": "curve",
+      "url": "https://raw.githubusercontent.com/PointCloudLibrary/pcl/66e1d0ea8cc3fa54820eb38e18ad0adac6345b94/test/curve3d.pcd",
+      "bytes": 3889,
+      "sha256": "bb3bab594f8e52a0a8cfd661eb746ce382b0b67c961fd40f1d6bba4260c981a0"
+    },
+    {
+      "file": "lamppost.pcd",
+      "class": "lamppost",
+      "url": "https://raw.githubusercontent.com/PointCloudLibrary/pcl/66e1d0ea8cc3fa54820eb38e18ad0adac6345b94/test/lamppost.pcd",
+      "bytes": 47146,
+      "sha256": "b585826c91a8f681fed0a617455723049beddca21e3ca59af6aa61227eec1a12"
+    },
+    {
+      "file": "sac_plane_test.pcd",
+      "class": "plane",
+      "url": "https://raw.githubusercontent.com/PointCloudLibrary/pcl/66e1d0ea8cc3fa54820eb38e18ad0adac6345b94/test/sac_plane_test.pcd",
+      "bytes": 250720,
+      "sha256": "8595cd9086d16862300ed82ae1c7499a125943637ebca231e17844dab25c6e50"
+    }
+  ]
+}
