@@ -4,6 +4,12 @@
 
 PC-RGNN is a notebook-first point-cloud learning project built around PyTorch graph neural networks and multi-scale attention. The end-to-end path takes a partial point cloud, predicts missing points, builds features from the observed-plus-completed cloud, and feeds those features to detection heads. It contains a reproducible PCL demonstration and a separate nuScenes mini object-level detection track, with dataset provenance, integrity checks, scene-aware validation, and explicit evaluation limitations.
 
+## Project description
+
+PC-RGNN is designed to improve 3D point-cloud understanding when objects are only partially observed because of sensor viewpoint, occlusion, or sparse LiDAR sampling. The pipeline first receives an observed point cloud and uses a learned completion decoder to estimate missing geometric points. The observed and predicted points are then fused into a completed representation. Local neighborhoods and larger contextual neighborhoods are constructed as graphs, and multi-scale attention aggregates geometric relationships into a compact feature vector. Detection heads use these features to predict object class and 3D bounding-box parameters, including center, dimensions, and orientation.
+
+The repository includes a verified public PCL demonstration for the completion and graph-feature stages, plus an official nuScenes mini development track for annotated LiDAR detection. The PCL experiment uses simulated masking because the small PCL corpus has no complete occlusion annotations; the nuScenes track is the intended path for scene-aware detection evaluation. This separation keeps the architecture demonstrable while making clear which results are real benchmark measurements and which are controlled development experiments.
+
 ## Project scope
 
 This repository contains two explicitly separated, notebook-first tracks:
