@@ -1,5 +1,7 @@
 # PCRGNN
 
+[![Open the nuScenes notebook in Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ALIAQIL/PCRGNN/blob/main/nuscenes_mini_pcrgnn_detection.ipynb)
+
 ## Overview
 
 PC-RGNN is a notebook-first point-cloud learning project built around PyTorch graph neural networks and multi-scale attention. The end-to-end path takes a partial point cloud, predicts missing points, builds features from the observed-plus-completed cloud, and feeds those features to detection heads. It contains a reproducible PCL demonstration and a separate nuScenes mini object-level detection track, with dataset provenance, integrity checks, scene-aware validation, and explicit evaluation limitations.
@@ -47,6 +49,10 @@ export NUSCENES_ROOT=/path/to/nuscenes
 The notebook uses official scene, category, pose, LiDAR, and box tables. It enforces a scene-disjoint train/validation split and performs an object-level development experiment from jittered proposal crops with ground-truth box targets. Results are mini-split development diagnostics, not full-dataset leaderboard claims. The reported IoU is axis-aligned diagnostic IoU rather than official oriented nuScenes AP.
 
 If nuScenes is not mounted, the notebook skips data-dependent cells with setup instructions instead of fabricating results.
+
+### Run in Google Colab
+
+Open [nuscenes_mini_pcrgnn_detection.ipynb](nuscenes_mini_pcrgnn_detection.ipynb) in Colab and run the setup cell first. It installs the official `nuscenes-devkit` package from PyPI. Download the official `v1.0-mini` archive from the authenticated nuScenes download page, extract it in Colab or Google Drive, and set `NUSCENES_ROOT` to the extracted folder. The notebook then loads the official annotations and LiDAR, trains the completion-aware detector, and evaluates it on scene-disjoint validation scenes. No raw nuScenes files are committed to this repository.
 
 ## Reproducible PCL plots
 
