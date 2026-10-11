@@ -50,6 +50,12 @@ The notebook uses official scene, category, pose, LiDAR, and box tables. It enfo
 
 If nuScenes is not mounted, the notebook skips data-dependent cells with setup instructions instead of fabricating results.
 
+### Latest executed development result
+
+The notebook was executed locally against the official `v1.0-mini` archive stored outside Git. It loaded all 10 scenes, used a deterministic scene-disjoint split of 8 training scenes and 2 validation scenes, and processed 9,780 training and 2,731 validation object crops. Each crop used a jittered proposal center, 96 observed points, 32 held-out completion points, and mini-batches of 128; training ran for five epochs.
+
+The final training mean batch loss was `1.1264` (from `1.6880` in epoch 1). Validation diagnostics were: center MAE `0.3125 m`, size MAE `0.3646 m`, yaw MAE `1.5097 rad`, mean axis-aligned 3D IoU `0.2858`, and IoU@0.25 diagnostic hit rate `0.5240`. These precision/recall values are the same one-candidate-per-ground-truth crop hit rate, not full-scene precision/recall. They are development diagnostics for this compact completion-aware detector, not official nuScenes mAP or NDS.
+
 ### Run in Google Colab
 
 Open [nuscenes_mini_pcrgnn_detection.ipynb](nuscenes_mini_pcrgnn_detection.ipynb) in Colab and run the setup cell first. It installs the official `nuscenes-devkit` package from PyPI. Download the official `v1.0-mini` archive from the authenticated nuScenes download page, extract it in Colab or Google Drive, and set `NUSCENES_ROOT` to the extracted folder. The notebook then loads the official annotations and LiDAR, trains the completion-aware detector, and evaluates it on scene-disjoint validation scenes. No raw nuScenes files are committed to this repository.

@@ -4,5 +4,12 @@ __pycache__/
 .ipynb_checkpoints/
 data/nuscenes/
 data/nuscenes/**
+data/pc_rgnn/v1.0-mini.tgz
+data/pc_rgnn/v1.0-mini/
+data/pc_rgnn/maps/
+data/pc_rgnn/samples/
+data/pc_rgnn/sweeps/
+data/pc_rgnn/LICENSE
+data/pc_rgnn/.v1.0-mini.txt
 outputs/
 checkpoints/
