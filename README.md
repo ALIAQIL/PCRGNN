@@ -1,5 +1,11 @@
 # PCRGNN
 
+## CV-ready project description
+
+Developed a reproducible point-cloud learning project using PyTorch graph neural networks and multi-scale attention. Implemented graph-based point-cloud completion and an object-level 3D detection pipeline for the nuScenes mini dataset, including LiDAR preprocessing, scene-disjoint validation, box regression, 3D IoU, precision, recall, and per-class evaluation. Added dataset provenance tracking, SHA-256 integrity checks, and transparent reporting that separates real source data from derived and synthetic samples.
+
+## Project scope
+
 This repository contains two explicitly separated, notebook-first tracks:
 
 1. [pc_rgnn_pcl_integrity_demo.ipynb](pc_rgnn_pcl_integrity_demo.ipynb) verifies eight real public PCL test-corpus files and demonstrates graph completion and multi-scale attention. Its derived views and synthetic midpoint points retain source identifiers. Because the manually assigned filename labels do not provide a class-balanced source-aware holdout, it reports no classification accuracy.
